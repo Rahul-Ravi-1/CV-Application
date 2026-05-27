@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0;
+  min-height: 100vh
+}
+
+
+.sidebar {
+  width: 560px;             
+  flex-shrink: 0;            
+  background: #566779;      
+  border-right: 1px solid #1c1c1d;
+}
+.cvpreview{
+  flex: 1 1 0;
+  min-width: 0;
+  background: #58585f;
+}
+
+/* Title */
+.cvpreview > h1 {
+  text-align: center;
+}
+
+
