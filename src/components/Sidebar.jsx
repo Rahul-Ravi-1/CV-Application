@@ -1,7 +1,7 @@
-export default function SideBar() {
+export default function SideBar({children}) {
     return (
         <div className="sidebar">
-            <h1> Side </h1>
+            {children}
         </div>
     );
 }

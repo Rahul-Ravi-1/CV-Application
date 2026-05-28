@@ -21,6 +21,9 @@ body {
   background: #566779;      
   border-right: 1px solid #1c1c1d;
 }
+.sidebar-personal{
+  
+}
 .cvpreview{
   flex: 1 1 0;
   min-width: 0;
