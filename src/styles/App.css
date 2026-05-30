@@ -14,6 +14,21 @@ body {
   min-height: 100vh
 }
 
+.section-bar {
+  flex-shrink: 0;
+  width: 72px;
+  align-self: center;           /* vertical center in viewport */
+  max-height: 33vh;             /* ~ middle third */
+  min-height: min-content;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 8px;
+  background: #2a2a2e;
+  border-radius: 16px;
+  margin-left: 12px;
+  overflow-y: auto;             /* grows until max, then scroll */
+}
 
 .sidebar {
   width: 560px;             
