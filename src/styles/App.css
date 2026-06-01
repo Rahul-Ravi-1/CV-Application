@@ -27,7 +27,7 @@ body {
   background: #2a2a2e;
   border-radius: 16px;
   margin-left: 12px;
-  overflow-y: auto;             /* grows until max, then scroll */
+  overflow-y: auto;       
 }
 
 .sidebar {
@@ -39,6 +39,32 @@ body {
 .sidebar-personal{
   
 }
+
+
+.cv-preview-block {
+  margin-bottom: 1.25rem;
+}
+
+.cv-preview-block h2 {
+  margin: 0 0 0.25rem;
+}
+
+.cv-preview-block h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cv-preview-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.cv-preview-list li {
+  margin-bottom: 0.35rem;
+}
+
 .cvpreview{
   flex: 1 1 0;
   min-width: 0;

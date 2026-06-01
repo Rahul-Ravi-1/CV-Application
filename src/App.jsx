@@ -5,35 +5,18 @@ import CVPreviewContainer from './components/CVPreviewContainer.jsx'
 import PersonalDetailsForm from './components/PersonalDetailsForm.jsx'
 import WorkExperience from './components/WorkExperience.jsx'
 import Education from './components/Education.jsx'
+import SectionPreview from './components/SectionPreview.jsx';
+import {
+  SECTION_CATALOG,
+  createInitialSections,
+} from './javascript/sectionCatalog.js';
+
 import { useState } from 'react'
 function App() {
-  const initialId = crypto.randomUUID();
-  const SECTION_CATALOG = {
-    personal: {
-      label: 'Personal details',
-      defaultData: { fullName: '', email: '', phone: '' },
-    },
-    work: {
-      label: 'Work experience',
-      defaultData: {
-        items: [{ id: crypto.randomUUID(), role: '', company: '' }],
-      },
-    },
-    education: {
-      label: 'Education',
-      defaultData: {
-        items: [{ id: crypto.randomUUID(), school: '', from: '', to: '' }],
-      },
-    },
-
-  };
-
-  const [sections, setSections] = useState([
-    { id: initialId, type: 'personal', data: structuredClone(SECTION_CATALOG.personal.defaultData) },
-    { id: crypto.randomUUID(), type: 'work', data: structuredClone(SECTION_CATALOG.work.defaultData) },
-    { id: crypto.randomUUID(), type: 'education', data: structuredClone(SECTION_CATALOG.education.defaultData) },
-  ]);
-  const [activeSectionId, setActiveSectionId] = useState(initialId);
+  const init = createInitialSections();
+  const [sections, setSections] = useState(init.sections);
+  const [activeSectionId, setActiveSectionId] = useState(init.activeSectionId);
+  const activeSection = sections.find((s) => s.id === activeSectionId);
 
   function resolveSectionId(type, sectionId) {
     if (sectionId != null) return sectionId;
@@ -42,8 +25,7 @@ function App() {
     return sections.find((s) => s.type === type)?.id;
   }
 
-  function addSection(type)
-  {
+  function addSection(type) {
     const template = SECTION_CATALOG[type];
     const newSection = {
       id: crypto.randomUUID(),
@@ -87,15 +69,15 @@ function App() {
         section.id !== id
           ? section
           : {
-              ...section,
-              data: {
-                ...section.data,
-                items: [
-                  ...(section.data.items ?? []),
-                  { id: crypto.randomUUID(), role: '', company: '' },
-                ],
-              },
-            }
+            ...section,
+            data: {
+              ...section.data,
+              items: [
+                ...(section.data.items ?? []),
+                { id: crypto.randomUUID(), role: '', company: '' },
+              ],
+            },
+          }
       )
     );
   }
@@ -106,14 +88,14 @@ function App() {
         section.id !== sectionId
           ? section
           : {
-              ...section,
-              data: {
-                ...section.data,
-                items: (section.data.items ?? []).map((entry) =>
-                  entry.id === entryId ? { ...entry, [field]: value } : entry
-                ),
-              },
-            }
+            ...section,
+            data: {
+              ...section.data,
+              items: (section.data.items ?? []).map((entry) =>
+                entry.id === entryId ? { ...entry, [field]: value } : entry
+              ),
+            },
+          }
       )
     );
   }
@@ -129,14 +111,14 @@ function App() {
         section.id !== sectionId
           ? section
           : {
-              ...section,
-              data: {
-                ...section.data,
-                items: (section.data.items ?? []).filter(
-                  (entry) => entry.id !== entryId
-                ),
-              },
-            }
+            ...section,
+            data: {
+              ...section.data,
+              items: (section.data.items ?? []).filter(
+                (entry) => entry.id !== entryId
+              ),
+            },
+          }
       )
     );
   }
@@ -154,20 +136,20 @@ function App() {
         section.id !== id
           ? section
           : {
-              ...section,
-              data: {
-                ...section.data,
-                items: [
-                  ...(section.data.items ?? []),
-                  {
-                    id: crypto.randomUUID(),
-                    school: '',
-                    from: '',
-                    to: '',
-                  },
-                ],
-              },
-            }
+            ...section,
+            data: {
+              ...section.data,
+              items: [
+                ...(section.data.items ?? []),
+                {
+                  id: crypto.randomUUID(),
+                  school: '',
+                  from: '',
+                  to: '',
+                },
+              ],
+            },
+          }
       )
     );
   }
@@ -178,14 +160,14 @@ function App() {
         section.id !== sectionId
           ? section
           : {
-              ...section,
-              data: {
-                ...section.data,
-                items: (section.data.items ?? []).map((entry) =>
-                  entry.id === entryId ? { ...entry, [field]: value } : entry
-                ),
-              },
-            }
+            ...section,
+            data: {
+              ...section.data,
+              items: (section.data.items ?? []).map((entry) =>
+                entry.id === entryId ? { ...entry, [field]: value } : entry
+              ),
+            },
+          }
       )
     );
   }
@@ -201,14 +183,14 @@ function App() {
         section.id !== sectionId
           ? section
           : {
-              ...section,
-              data: {
-                ...section.data,
-                items: (section.data.items ?? []).filter(
-                  (entry) => entry.id !== entryId
-                ),
-              },
-            }
+            ...section,
+            data: {
+              ...section.data,
+              items: (section.data.items ?? []).filter(
+                (entry) => entry.id !== entryId
+              ),
+            },
+          }
       )
     );
   }
@@ -217,56 +199,39 @@ function App() {
     const sectionId = resolveSectionId('education');
     if (sectionId) deleteEducationEntry(sectionId, entryId);
   }
-
-  const personalInfo =
-    sections.find((s) => s.type === 'personal')?.data ?? {
-      fullName: '',
-      email: '',
-      phone: '',
-    };
-
-  const workExperience =
-    sections.find((s) => s.type === 'work')?.data?.items ?? [];
-
-  const education =
-    sections.find((s) => s.type === 'education')?.data?.items ?? [];
-
   return (
     <main className="app">
       <Section
-        sections = {sections}
+        sections={sections}
         activeSectionId={activeSectionId}
         setActiveSectionId={setActiveSectionId}
         sectionCatalog={SECTION_CATALOG}
       />
       <Sidebar>
-        <PersonalDetailsForm
-        personalInfo={personalInfo}
-        onChange={handlePersonalChange}
-        >
-        </PersonalDetailsForm>
-      <WorkExperience
-       workExperience={workExperience}
-       onAdd={addWorkExperience}
-       onChange={updateWorkExperience}
-       />
-      <Education
-        education={education}
-        onAdd={addEducation}
-        onChange={updateEducation}
-      />
+        {activeSection?.type === 'personal' && (
+          <PersonalDetailsForm
+            personalInfo={activeSection.data}
+            onChange={handlePersonalChange}
+          />
+        )}
+        {activeSection?.type === 'work' && (
+          <WorkExperience
+            workExperience={activeSection.data.items ?? []}
+            onAdd={() => addWorkExperience(activeSection.id)}
+            onChange={updateWorkExperience}
+          />
+        )}
+        {activeSection?.type === 'education' && (
+          <Education
+            education={activeSection.data.items ?? []}
+            onAdd={() => addEducation(activeSection.id)}
+            onChange={updateEducation}
+          />
+        )}
       </Sidebar>
       <CVPreviewContainer>
-        <p>{personalInfo.fullName}</p>
-        <p>{personalInfo.email}</p>
-        <p>{personalInfo.phone}</p>
-
-        {workExperience.map((entry) => (
-          <p key={entry.id}>{entry.role}</p>
-        ))}
-
-        {education.map((entry) => (
-          <p key={entry.id}>{entry.school} From: {entry.from} To: {entry.to}</p>
+        {sections.map((section) => (
+          <SectionPreview key={section.id} section={section} />
         ))}
       </CVPreviewContainer>
     </main>
