@@ -1,10 +1,11 @@
 body {
   margin: 0;
+  background: #1a1a1d;
+  color: #e8e8ec;
 }
 *, *::before, *::after {
   box-sizing: border-box;
 }
-
 .app {
   display: flex;
   flex-direction: row;
@@ -29,6 +30,24 @@ body {
   margin-left: 12px;
   overflow-y: auto;       
 }
+.section-bar__btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #9a9aa3;
+  cursor: pointer;
+}
+
+.section-bar__btn.active {
+  background: #2e2e33;
+  color: #6b8cff;
+  box-shadow: inset 3px #6b8cff;
+}
 
 .sidebar {
   width: 560px;             
@@ -36,10 +55,79 @@ body {
   background: #566779;      
   border-right: 1px solid #1c1c1d;
 }
-.sidebar-personal{
-  
+.sidebar-personal,
+.sidebar-work,
+.sidebar-education {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.sidebar-personal h2,
+.sidebar-work h2,
+.sidebar-education h2 {
+  margin: 0 0 0.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #3a3a40;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #e8e8ec;
+}
+.sidebar-personal label,
+.sidebar-work label,
+.sidebar-education label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: #9a9aa3;
+}
+.sidebar-personal input,
+.sidebar-work input,
+.sidebar-education input {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #3a3a40;
+  border-radius: 8px;
+  background: #2e2e33;
+  color: #e8e8ec;
+  font-size: 0.9375rem;
+}
+.sidebar-personal input:focus,
+.sidebar-work input:focus,
+.sidebar-education input:focus {
+  outline: 2px solid #6b8cff;
+  outline-offset: 1px;
+  border-color: #6b8cff;
+}
+.sidebar-personal button,
+.sidebar-work button,
+.sidebar-education button {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #3a3a40;
+  border-radius: 8px;
+  background: #2e2e33;
+  color: #e8e8ec;
+  cursor: pointer;
+}
+.sidebar-personal button:hover,
+.sidebar-work button:hover,
+.sidebar-education button:hover {
+  background: #35353b;
+  border-color: #6b8cff;
 }
 
+.entry-card {
+  padding: 1rem;
+  border: 1px solid #3a3a40;
+  border-radius: 12px;
+  background: #2e2e33;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
 
 .cv-preview-block {
   margin-bottom: 1.25rem;

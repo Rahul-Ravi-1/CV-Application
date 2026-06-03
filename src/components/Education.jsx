@@ -3,7 +3,7 @@ export default function Education({ education, onAdd, onChange }) {
         <div className="sidebar-education">
             <h2>Education</h2>
             {education.map((entry) => (
-            <div key={entry.id}>
+            <div key={entry.id} className="entry-card">
                 <label>
                     School
                     <input
