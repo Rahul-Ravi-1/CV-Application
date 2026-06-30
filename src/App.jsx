@@ -228,6 +228,13 @@ function App() {
             onChange={updateEducation}
           />
         )}
+        <Section
+          sections={sections}
+          activeSectionId={activeSectionId}
+          setActiveSectionId={setActiveSectionId}
+          sectionCatalog={SECTION_CATALOG}
+          onAddSection={addSection}
+        />
       </Sidebar>
       <CVPreviewContainer>
         {sections.map((section) => (
