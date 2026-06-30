@@ -16,6 +16,14 @@ const initialId = crypto.randomUUID();
         items: [{ id: crypto.randomUUID(), school: '', from: '', to: '' }],
       },
     },
+    custom : {
+      label : "Custom Section",
+      defaultData: {
+        title: '',
+        items: [{id: crypto.randomUUID(), role: '', company: '' }],
+      },
+
+    },
 
   };
 

@@ -206,6 +206,7 @@ function App() {
         activeSectionId={activeSectionId}
         setActiveSectionId={setActiveSectionId}
         sectionCatalog={SECTION_CATALOG}
+        onAddSection={addSection}
       />
       <Sidebar>
         {activeSection?.type === 'personal' && (
@@ -228,13 +229,6 @@ function App() {
             onChange={updateEducation}
           />
         )}
-        <Section
-          sections={sections}
-          activeSectionId={activeSectionId}
-          setActiveSectionId={setActiveSectionId}
-          sectionCatalog={SECTION_CATALOG}
-          onAddSection={addSection}
-        />
       </Sidebar>
       <CVPreviewContainer>
         {sections.map((section) => (

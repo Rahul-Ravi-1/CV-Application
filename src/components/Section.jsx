@@ -1,4 +1,4 @@
-export default function Section({ sections, activeSectionId, setActiveSectionId, sectionCatalog }) {
+export default function Section({ sections, activeSectionId, setActiveSectionId, sectionCatalog, onAddSection }) {
   return (
     <nav className="section-bar" aria-label="CV sections">
       {sections.map((section) => (
@@ -12,6 +12,13 @@ export default function Section({ sections, activeSectionId, setActiveSectionId,
           {section.type}
         </button>
       ))}
+      <button
+        type="button"
+        className="section-bar__btn section-bar__btn--add"
+        onClick={() => onAddSection('custom')}
+      >
+        + Add section
+      </button>
     </nav>
   );
 }
